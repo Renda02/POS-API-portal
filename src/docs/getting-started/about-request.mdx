@@ -1,0 +1,62 @@
+---
+title: "About request"
+---
+
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { json } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+## Base URL
+
+Access the API through:
+
+- Development: <code>http://localhost:80/</code>
+
+## Authentication
+
+Our API requires authentication using Bearer tokens. Follow these steps to authenticate:
+
+1. Register a new user account.
+2. Obtain an access token.
+3. Include the token in subsequent requests.
+
+### Getting an Access Token
+
+Make a POST request to `/auth/token`:
+
+<SyntaxHighlighter language="json" style={json}>
+{`curl -X POST "http://localhost:80/auth/token" \\
+     -H "Content-Type: application/json" \\
+     -d '{"user_name": "john_doe", "password": "P@ssw0rd!"}'`}
+</SyntaxHighlighter>
+
+## Making Requests
+
+### HTTP Methods
+
+The API supports standard HTTP methods:
+
+| Method | Description                    |
+|--------|--------------------------------|
+| GET    | Retrieve resources             |
+| POST   | Create new resources           |
+| PUT    | Update existing resources      |
+| DELETE | Remove resources               |
+
+### Headers
+
+Required headers for all requests:
+
+<SyntaxHighlighter language="json" style={json}>
+{`curl -X POST "http://localhost:80/auth/token" \\
+     -H "Content-Type: application/json" \\
+     -d '{"user_name": "john_doe", "password": "P@ssw0rd!"}'`}
+</SyntaxHighlighter>
+
+### Request Parameters
+
+#### Path Parameters
+
+Used to identify specific resources in the URL:
+
+```plaintext
+GET /orders/{id}
