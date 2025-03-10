@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant Customer
+    participant FoodApp
+    participant Kitchen Display System
+    participant PaymentGateway
+
+    Customer->>FoodApp: Opens Application
+    Customer->>FoodApp: Browses Menus
+    Customer->>FoodApp: Selects and Customize Items
+    Customer->>FoodApp: Proceeds to Checkout
+    FoodApp->>PaymentGateway: Processes Payment
+    PaymentGateway-->>FoodApp: Confirms Payment 
+    FoodApp->>Kitchen Display System: Sends Order Details
+    Kitchen Display System-->>FoodApp: Orders Acknowledgment
+    FoodApp-->>Customer: Order Confirmation

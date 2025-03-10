@@ -1,0 +1,76 @@
+---
+title: ""
+---
+
+Our API utilizes OAuth 2.0 authorization framework for secure authentication and authorization, ensuring that only authorized users can access specific resources and perform actions based on their roles and permissions.
+
+The image below outlines a successful authentication flow
+
+
+## Authorization
+
+To interact with our API, you need to authenticate your user account and use an access token. All API requests require a valid JWT token to authorize access to protected resources.
+
+### **Creating an account**
+
+Before you can authenticate and request an access token, you must first create a user account. This is done by sending a `POST/users` endpoint.
+
+**Request example**:
+
+```json
+{
+  "username": "user@example.com",
+  "password": "your_password"
+}
+```
+
+**Response example**:
+
+```json
+{
+  "id": "674d0bf5c28b69001f8e03a1",
+  "created_at": "2024-04-22T10:00:00Z",
+  "updated_at": "2024-04-22T10:00:00Z",
+  "user_name": "john_doe",
+  "email": "johndoe@gmail.com",
+  "password": "P@ssw0rd!",
+  "role": "manager"
+}
+```
+
+### 2. **Obtaining an Access Token**
+
+Once your account is created, you can authenticate the user and obtain an access token. This is done by sending a `POST/auth/token` endpoint.
+
+**Request example:**
+
+```json
+{
+  "username": "user@example.com",
+  "password": "your_password"
+}
+```
+
+**Response example**:
+
+```json
+{
+  "auth_id": "674d0bf5c28b69001f8e03a1",
+  "created_at": "2024-04-22T10:00:00Z",
+  "updated_at": "2024-04-22T10:00:00Z",
+  "access_token": "fa0b97b2-445f-41d2-b50f-fb3b014a301e",
+  "expires_at": "2024-04-22T10:00:00Z",
+  "refresh_token": "d1a3e281-96b6-4f77-a587-7b6c8c2a96d9",
+  "token_type": "Bearer",
+  "user_name": "john_doe"
+}
+```
+
+Once you have the access token, include it in the `Authorization` header of every request to access protected resources.
+
+### **Error Handling**
+
+**401 Unauthorized**
+
+Ensure the **Authorization** header is included in your request.
+If the header is present, verify that the access token is correct.

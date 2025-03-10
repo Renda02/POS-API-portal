@@ -1,0 +1,27 @@
+---
+title: "Resource Descriptions"
+---
+
+Our Point of Service (POS) API supports the following:
+
+- Handle communication between frontend applications and database.
+- Process business logic
+- Manage data transactions
+- Implement authentication and authorization.
+
+## Key paths and description
+
+| Key path | Description |
+| --- | --- |
+| `/orders` | This operation creates an order when a patron places an order via a mobile app, tablet app, self-service kiosk, etc., depending on the API consumer's use case. |
+| `/orders/{id}` | This operation retrieves detailed information about a specific order identified by its unique order ID. |
+| `/orders/{id}/dishes` | This operation retrieves a list of dishes belonging to a specific order. Each dish object returned contains detailed information about the dish and which ingredients are essential to preparing the dish. |
+| `/dishes` | This operation creates a new dish with the provided information. The `id` returned in the response can be used to associate the dish with an order. |
+| `/dishes/{id}` | Retrieve detailed information about a specific dish identified by its unique dish ID. |
+| `/dishes/{id}/ingredients` | This operation retrieves a list of ingredients belonging to a specific dish. Importantly, the `in_stock_qty` for a dish indicates how much of the ingredient is available. |
+| `/ingredients` | This operation creates a new ingredient with the provided information. Set an initial quantity of the ingredient using the `in_stock_qty` field. |
+| `/ingredients/{id}` | This operation retrieves information about a specific ingredient identified by its unique ingredient ID. |
+| `/users` | This operation creates a new user with the provided information. The API server uses `role` to determine the access rights of the user. The `email` field is used for password reset. |
+| `/users/{id}` | This operation retrieves information about a user identified by its unique user ID. |
+| `/auth/token` | This operation exchanges the user's username and password directly for an access token. The client ID and client secret are used for client authentication (basic). Certain endpoints require the access token in the Authorization header to perform admin functions like creating menus. |
+| `/auth/refresh-token` | This operation refreshes an access token using the refresh token, providing a new access token and refresh token to the user without requiring reauthentication. |
