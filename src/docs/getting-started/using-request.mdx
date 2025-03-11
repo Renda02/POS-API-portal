@@ -1,0 +1,63 @@
+---
+title: ""
+---
+
+After sending a request, the API returns a HTTPS status code that indicates the outcome of the request:
+
+- **200 OK**: The request was successful.
+- **201 Created**: A new resource was successfully created.
+- **400 Bad Request**: The request was invalid (e.g., missing required fields).
+- **401 Unauthorized**: The access token is missing or invalid.
+- **403 Forbidden**: The user does not have permission.
+- **500 Internal Server Error**: A server issue occurred.
+
+For more details, refer to [MDN HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
+
+## Response Headers
+
+Response headers convey information about the API response. View them in Postman under the Headers tab in the Response panel. Some key headers include:
+
+- **Content-Type**: Specifies the format of the response body (e.g., `application/json`).
+- **Authorization**: Contains authentication information when applicable.
+- **Location**: Points to the URL of a newly created resource.
+
+Refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) for details on HTTP headers.
+
+## About the Response Body
+
+For requests that return a response body, the data is typically formatted in JSON. The response body may include:
+
+- **ID**: Unique identifiers for created resources.
+- **Links**: URLs pointing to additional resources.
+- **Timestamps**: Indicating when a resource was created or updated.
+- **Null values**: Optional fields may return `null` if not set.
+
+## Pagination
+
+The API supports pagination for endpoints that return lists of resources. You can use the following query parameters:
+
+- **`limit`**: The number of items to return per page (maximum: 30).
+- **`offset`**: The number of items to skip before starting to return results.
+
+### Example Request
+
+```json
+GET/orders?limit=10&offset=20
+Authorization: Bearer your_access_token
+```
+
+## Response
+```json
+{
+  "results": [
+    { "id": "1", "name": "Order 1" },
+    { "id": "2", "name": "Order 2" }
+  ],
+  "total_results": 100,
+  "limit": 10,
+  "offset": 0
+}
+```
+
+Use query parameters such as `limit` and `offset` to navigate paginated results effectively.
+ 
