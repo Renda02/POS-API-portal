@@ -1,0 +1,127 @@
+---
+title: "Point of Service (POS) API Technical Flow"
+---
+
+This page outlines the technical flow for managing the Point of Service (POS) API. The API facilitates authentication, ingredient management, and dish creation. The following steps detail the interaction between an admin and the API to ensure smooth operational execution.
+
+## Authentication
+
+An admin must first authenticate and obtain an access token.
+
+1. Authenticate using `POST /auth/token` with admin credentials.
+2. Use the returned access token in the Authorization header for all subsequent API calls.
+
+**Request body example:**
+
+```json
+{
+  "grant_type": "password",
+  "user_name": "admin_user",
+  "password": "SecurePass123!"
+}
+```
+
+On successful authentication, the server returns an **access token** with an expiration time.
+
+**Response Body:**
+
+```json
+{
+  "access_token": "fa0b97b2-445f-41d2-b50f-fb3b014a301e",
+  "expires_at": "2024-04-22T10:00:00Z",
+  "token_type": "Bearer"
+}
+```
+
+## Ingredients
+
+Admins can add and manage ingredients to ensure accurate stock levels and availability for dishes.
+
+### Create an Ingredient
+
+To add a new ingredient, send a `POST /ingredients` request with the ingredient details:
+
+```json
+{
+  "name": "Tomato",
+  "in_stock_qty": 100,
+  "price": 1.50
+}
+```
+
+A successful response returns the created ingredient:
+
+```json
+{
+  "id": "12345abcde",
+  "name": "Tomato",
+  "in_stock_qty": 100,
+  "price": 1.50,
+  "created_at": "2025-02-08T14:30:00Z"
+}
+```
+
+## Dishes
+
+Admins can create new dishes by specifying their name, category, ingredients, and preparation details.
+
+### Create a Dish
+
+To add a new dish, send a `POST /dishes` request with the dish details:
+
+```json
+{
+  "name": "Margherita Pizza",
+  "description": "Classic Italian pizza with fresh basil and mozzarella.",
+  "category": "Main Course",
+  "image_name": "pizza",
+  "ingredients": [
+    { "ingredient_id": "12345abcde", "is_essential": true },
+    { "ingredient_id": "67890fghij", "is_essential": true }
+  ],
+  "preparation_time": 20,
+  "price": 12.99,
+  "station": "hot"
+}
+```
+
+A successful response returns the created dish:
+
+```json
+{
+  "id": "98765xyz",
+  "name": "Margherita Pizza",
+  "description": "Classic Italian pizza with fresh basil and mozzarella.",
+  "category": "Main Course",
+  "price": 12.99,
+  "created_at": "2025-02-08T14:45:00Z"
+}
+```
+
+## Orders
+
+Admins can monitor and manage orders placed by customers.
+
+### Retrieve Orders
+
+To fetch a list of all orders, send a `GET /orders` request.
+
+A successful response returns a list of orders:
+
+```json
+{
+  "results": [
+    {
+      "id": "78965qwerty",
+      "name": "John",
+      "table_number": 12,
+      "dish_ids": [
+        "98765xyz",
+        "65432abc"
+      ],
+      "status": "Received"
+    }
+  ],
+  "total_results": 1
+}
+```
