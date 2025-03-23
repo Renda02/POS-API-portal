@@ -42,7 +42,7 @@ The API supports standard HTTP methods:
 | PUT    | Update existing resources      |
 | DELETE | Remove resources               |
 
-### Headers
+### Authorization header
 
 Required headers for all requests:
 
@@ -60,3 +60,13 @@ Used to identify specific resources in the URL:
 
 ```plaintext
 GET /orders/{id}
+```
+
+## Available endpoints
+
+The following endpoints are available:
+
+- `/dishes`: Manage menu items
+- `/ingredients`: Manage ingredient inventory
+- `/users`: User management
+- `/orders`: Order processing

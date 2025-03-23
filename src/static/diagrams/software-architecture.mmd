@@ -1,0 +1,14 @@
+graph LR
+    A[Patron customer] -->|Browses menu and places orders| D[POS Platform]
+    B[Admin manager] -->|Oversees and manages the platform| D
+    C[Staff employee] -->|Monitors and manages orders| D
+    
+    subgraph POS Platform
+        D[POS Platform]
+    end
+    
+    style A fill:#e6e6ff,stroke:#9999ff
+    style B fill:#e6e6ff,stroke:#9999ff
+    style C fill:#e6e6ff,stroke:#9999ff
+    style D fill:#e6e6ff,stroke:#9999ff
+    style POS Platform fill:#ffffcc,stroke:#ffff99

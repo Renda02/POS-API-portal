@@ -1,0 +1,28 @@
+flowchart TD
+    A[Start] --> B[Dashboard Display]
+    B --> C[Browse Menu]
+    
+    C --> D[Category Navigation]
+    D --> E[View Dish Information]
+    E --> F[Select Dishes]
+    
+    F --> G[Add to Cart]
+    F --> H[Customize Dish]
+    H --> G
+    G --> I[View Cart Summary]
+    
+    I --> J[Proceed to Checkout]
+    J --> K[Order Review]
+    K --> L[Payment and Details]
+    L --> M[Order Confirmation]
+    
+    M --> N[On-Screen Confirmation]
+    
+    N --> O{Dining Option?}
+    O -->|Tableside| P[Order Number Placard]
+    P --> Q[Table Delivery]
+    
+    O -->|Takeaway| R[Receipt with Order Number]
+    
+    Q --> S[End]
+    R --> S

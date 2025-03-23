@@ -2,7 +2,7 @@
 title: "Account setup"
 ---
 
-After you have authenticated to the API, you can send requests to the API. The base URL for all endpoints is:
+After you have authenticated to the API, you can send requests to the API. The local base URL for all endpoints is:
 
  `http://localhost:80/` 
 
@@ -21,7 +21,7 @@ Most API requests require authentication. Follow these steps:
 }
 ```
 
-1. Obtain an access token using `POST /auth/token`:
+2. Obtain an access token using `POST /auth/token`:
 
 ```
 {
@@ -31,7 +31,7 @@ Most API requests require authentication. Follow these steps:
 }
 ```
 
-1. The response includes an `access_token`. Use it in the `Authorization` header for future requests:
+3. The response includes an `access_token`. Use it in the `Authorization` header for future requests:
 
 ```
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -56,14 +56,5 @@ curl -X POST "http://localhost:80/orders" \
        "special_requests": "No peanuts"
      }'
 ```
-
-### Handling API Responses
-
-- **201 Created**: The request was successful, and a new resource was created.
-- **400 Bad Request**: The request was invalid (e.g., missing required fields).
-- **401 Unauthorized**: The access token is missing or invalid.
-- **403 Forbidden**: The user does not have permission.
-- **500 Internal Server Error**: A server issue occurred.
-- 
 
 Following these steps ensures secure and efficient interaction with the POS REST API.
