@@ -9,7 +9,7 @@ This page outlines the software architecture, detailing how different user roles
 
 The system consists of multiple interconnected components:
 
-### 1. Users & Roles
+### 1. Users and roles
 
 Users interact with the system through different applications, each tailored to their needs:
 
@@ -17,7 +17,7 @@ Users interact with the system through different applications, each tailored to 
 - **Admin (Manager)**: Oversees platform operations, manages menus, users, and business analytics.
 - **Staff (Employees)**: Monitors and fulfills orders using a kitchen display system.
 
-### 2. Frontend Applications
+### 2. Frontend applications
 
 A dedicated frontend application supports each user role:
 
@@ -35,7 +35,7 @@ The **POS Platform** serves as the central system that connects all frontend app
 - **Menu service**: Manages dish availability and pricing (`GET /dishes`, `POST /dishes`).
 - **Payment processing**: Integrates with external providers and records transactions (`POST /orders` with payment data).
 
-### Data flow & synchronization
+### Data flow and synchronization
 
 The system ensures real-time updates through API interactions:
 
