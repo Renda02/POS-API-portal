@@ -35,7 +35,7 @@ paths:
     post:
       summary: Create an order
       operationId: postOrder
-      description: ...
+      description: Create an order with dish selections and customer details
       tags:
         - Orders
       security:
@@ -79,21 +79,23 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/CreateOrderRequest'
     get:
-      summary: ...
-      description: ...
+      summary: Get an order
+      description: |
+        Get a list of orders with optional filtering and sorting.
+        Use the `limit` and `offset` query parameters to paginate the response.
       operationId: getOrderList
       tags:
         - Orders
       parameters:
         - name: sort
           in: query
-          description: ...
+          description: sort order
           schema:
             type: string
           example: priority
         - name: order
           in: query
-          description: ...
+          description: Sort order, either ascending (asc) or descending (desc)
           schema:
             type: string
           example: asc
@@ -105,7 +107,7 @@ paths:
           example: table_number|status|priority
         - name: filter
           in: query
-          description: ...
+          description: Filter order separated by pipe symbol
           schema:
             type: string
             example: table_number.lt~5|status.eq~On the Way
@@ -151,8 +153,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /orders/{id}:
     get:
-      summary: ...
-      description: ...
+      summary: Get order
+      description: Use `id` to retrive information about a specific order.
       operationId: getOrder
       tags:
         - Orders
@@ -196,8 +198,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     put:
-      summary: ...
-      description: ...
+      summary: Update an existing order.
+      description: Use `id` to update an existing order.
       operationId: putOrder
       tags:
         - Orders
@@ -255,8 +257,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      summary: ...
-      description: ...
+      summary: Delete an order
+      description: Delete an order associated with a specific `id`.
       operationId: deleteOrder
       tags:
         - Orders
@@ -293,8 +295,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /orders/{id}/dishes:
     get:
-      summary: ...
-      description: ...
+      summary: Get a specific order
+      description: Use `id` to retrieve information about a specific order.
       operationId: getOrderDishes
       tags:
         - Orders
@@ -378,7 +380,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /dishes:
     post:
-      summary: Create a dish
+      summary: Create a dish.
       tags:
         - Dishes
       operationId: postDishes
@@ -424,8 +426,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     get:
-      summary: ...
-      description: ...
+      summary: Get a dish
+      description: Get information about the dish
       operationId: getDishList
       tags:
         - Dishes
@@ -438,7 +440,7 @@ paths:
           example: name
         - name: order
           in: query
-          description: ...
+          description: A description of the customer's order.
           schema:
             type: string
           example: asc
@@ -497,8 +499,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /dishes/{id}:
     get:
-      summary: ...
-      description: ...
+      summary: Get a dish
+      description: Get information about a spefic dish.
       operationId: getDish
       tags:
         - Dishes
@@ -542,7 +544,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     put:
-      summary: ...
+      summary: Update the dish
       operationId: putDish
       tags:
         - Dishes
@@ -556,7 +558,7 @@ paths:
           schema:
             type: string
           example: 66294b2a4475a41f3e709bce
-          description: ...
+          description: Your unique identifier for the dish.
       requestBody:
         $ref: '#/components/requestBodies/UpdateDishRequest'
       responses:
@@ -598,8 +600,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      summary: ...
-      description: ...
+      summary: Delete the dish
+      description: delete a specific dish from the system.
       operationId: deleteDish
       tags:
         - Dishes
@@ -612,7 +614,7 @@ paths:
           schema:
             type: string
           example: 66294b2a4475a41f3e709bd0
-          description: ...
+          description: Your unique identifier for the specific dish.
       responses:
         '204':
           description: No content. The operation was successful with no additional content to return.
@@ -636,8 +638,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /dishes/{id}/ingredients:
     get:
-      summary: ...
-      description: ...
+      summary: Get ingredients associated with a specific dish.
+      description: Retrieve ingredients associated with a specific dish
       operationId: getDishIngredients
       tags:
         - Dishes
@@ -648,7 +650,7 @@ paths:
           schema:
             type: string
           example: 66294b2a4475a41f3e709bd2
-          description: ...
+          description: Your unique identifier for the specific dish.
         - name: sort
           in: query
           description: ...
@@ -721,8 +723,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /ingredients:
     post:
-      summary: ...
-      description: ...
+      summary: Create the ingredient
+      description: Create a new ingredient to the inventory
       operationId: postIngredient
       tags:
         - Ingredients
@@ -761,8 +763,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     get:
-      summary: ...
-      description: ...
+      summary: Get a list of ingredient
+      description: Retrieve a list of ingredients with optional filtering and sorting
       operationId: getIngredientList
       tags:
         - Ingredients
@@ -833,8 +835,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /ingredients/{id}:
     get:
-      summary: ...
-      description: ...
+      summary: Get an ingredient
+      description: Use `id` to retrieve a specific ingredient.
       operationId: getIngredient
       tags:
         - Ingredients
@@ -878,8 +880,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     put:
-      summary: ...
-      description: ...
+      summary: Update an ingredient
+      description: Update an existing ingredient
       operationId: putIngredient
       tags:
         - Ingredients
@@ -925,8 +927,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      summary: ...
-      description: ...
+      summary: Delete ingredient
+      description: Delete the specific ingredient from the system
       operationId: deleteIngredient
       tags:
         - Ingredients
