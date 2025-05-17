@@ -2,34 +2,30 @@ openapi: 3.0.3
 info:
   title: Point of Service (POS) API
   version: '1.0'
-  description: ...
-  contact:
-    name: Course Discord server
-    url: https://discord.gg/dPsnz5u9
-    email: mark.wentowski@docsgeek.io
+  description: This API allows clients to manage a point-of-service system including orders, dishes, ingredients, users, and authentication. It supports CRUD operations and is intended to be used by restaurant staff and backend systems.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: http://localhost:80/
-    description: ...
+    description: Local development server.
   - url: '{gitpod-server-url}/'
-    description: ...
+    description: Gitpod development environment.
     variables:
       gitpod-server-url:
         default: https://8080-<workspace-id>.gitpod.io
-        description: ...
+        description: The base URL of the Gitpod workspace server.
 tags:
   - name: Orders
-    description: ...
+    description: Manage customer orders, including creation, updates, and tracking.
   - name: Dishes
-    description: ...
+    description: Manage dishes available for ordering, including their ingredients and categories.
   - name: Ingredients
-    description: ...
+    description: Track and manage ingredient inventory and usage in dishes.
   - name: Users
-    description: ...
+    description: Manage user accounts and roles for the application.
   - name: Auth
-    description: ...
+    description: Handle authentication, including token generation and refresh.
 paths:
   /orders:
     post:
@@ -1508,15 +1504,15 @@ components:
   schemas:
     AccessToken:
       type: string
-      description: ...
+      description: Bearer token used to authenticate API requests.
       example: fa0b97b2-445f-41d2-b50f-fb3b014a301e
     SpecialRequests:
       type: string
       nullable: true
-      description: ...
+      description: (Optional)Free-text special request or dietary instruction.
     Auth:
       type: object
-      description: ...
+      description: Object representing an authentication response.
       properties:
         auth_id:
           $ref: '#/components/schemas/Id'
@@ -1542,13 +1538,13 @@ components:
         - Dessert
         - Drinks
       example: Main Course
-      description: ...
+      description: The category of the menu.
     CreatedAt:
       type: string
       format: date-time
       example: '2024-04-22T10:00:00Z'
       readOnly: true
-      description: ...
+      description: The ISO 8601 timestamp indicating when the entity was created.
     Description:
       type: string
       example: A description of the resource.
@@ -1562,7 +1558,7 @@ components:
         name:
           type: string
           example: Risotto alla Milanese
-          description: ...
+          description: The name of menu.
         description:
           $ref: '#/components/schemas/Description'
         category:
@@ -1585,30 +1581,30 @@ components:
         - 692a4a34a46ecf001f35ac6f
         - 6a4a857c022eb7001f9b8972
         - 6b7c2441a0db43001f9bf377
-      description: ...
+      description: A list of dish identifiers included in the order.
     Email:
       type: string
       format: email
-      description: ...
+      description: The email address of the user.
       example: johndoe@gmail.com
     ExpiresAt:
       type: string
       format: date-time
       example: '2024-04-22T10:00:00Z'
       readOnly: true
-      description: ...
+      description: The ISO 8601 timestamp indicating when the access token will expire.
     RefreshToken:
       type: string
-      description: ...
+      description: The token used to obtain a new access token when the current one expires.
       example: d1a3e281-96b6-4f77-a587-7b6c8c2a96d9
     Id:
       type: string
       example: 674d0bf5c28b69001f8e03a1
       readOnly: true
-      description: ...
+      description: The unique identifier for the entity.
     ImageName:
       type: string
-      description: ...
+      description: The file name of the image associated with the dish.
       example: burger
     Ingredients:
       type: array
@@ -1650,7 +1646,7 @@ components:
           $ref: '#/components/schemas/Price'
     InStockQty:
       type: integer
-      description: ...
+      description: The number of units of the ingredient currently in stock.
       example: 3
     Order:
       type: object
@@ -1665,7 +1661,7 @@ components:
           type: string
           pattern: ^[^\s]*$
           example: John
-          description: ...
+          description: The name 
         table_number:
           $ref: '#/components/schemas/TableNumber'
         dish_ids:
@@ -1680,33 +1676,33 @@ components:
           $ref: '#/components/schemas/Status'
     Password:
       type: string
-      description: ...
+      description: The password for the user account.
       example: P@ssw0rd!
     PreparationTime:
       type: integer
-      description: ...
+      description: Estimated preparation time in minutes.
       example: 45
     Price:
       type: number
       format: float
       example: 999
-      description: ...
+      description: The price of the dish or ingredient in float format.
     Priority:
       type: integer
       minimum: 0
       maximum: 5
       default: 3
-      description: ...
+      description: The number indicating the order's priority
     Problem:
       type: object
       properties:
         title:
           type: string
-          description: ...
-          example: Human-readable error title.
+          description: A summary of the error that occurred.
+          example: Invalid Authentication Token
         detail:
           type: string
-          description: ...
+          description: Detailed explanation of the error, including potential causes and resolution steps.
           example: Human-readable error details.
       required:
         - title
@@ -1719,16 +1715,16 @@ components:
         - chef
         - manager
       example: manager
-      description: ...
+      description: The role assigned to the user.
     ScheduledAt:
       type: string
       format: date-time
-      description: ...
+      description: (optional) The time scheduled for the order in ISO 8601 format.
       nullable: true
       example: null
     Station:
       type: string
-      description: ...
+      description: The kitchen station responsible for preparing the dish.
       enum:
         - cold
         - hot
@@ -1745,22 +1741,22 @@ components:
         - On the Way
         - Ready for Pickup
       example: Received
-      description: ...
+      description: Current status of the order workflow.
     TableNumber:
       type: integer
       example: 8
       nullable: true
-      description: ...
+      description: (optional)The table number associated with the order.
     TokenType:
       type: string
-      description: ...
+      description: Type of token (e.g., Bearer).
       example: Bearer
     UpdatedAt:
       type: string
       format: date-time
       example: '2024-04-22T10:00:00Z'
       readOnly: true
-      description: ...
+      description: ISO 8601 timestamp indicating when the entity was last updated.
     User:
       type: object
       properties:
@@ -1780,7 +1776,7 @@ components:
           $ref: '#/components/schemas/Role'
     UserName:
       type: string
-      description: ...
+      description: The username associated with the user account.
       example: john_doe
   securitySchemes:
     AccessToken:
