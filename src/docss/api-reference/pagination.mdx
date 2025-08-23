@@ -1,0 +1,68 @@
+---
+title: "Pagination"
+---
+
+Learn how to navigate through large datasets using the POS API's pagination system.
+
+## Overview
+
+All list endpoints in our POS API support pagination to manage large datasets efficiently. Pagination allows you to break results into smaller, manageable pages.
+
+## Query Parameters
+
+| Parameter | Type | Required | Default | Max | Description |
+|-----------|------|----------|---------|-----|-------------|
+| `limit` | integer | No | - | 30 | Number of items to return per page |
+| `offset` | integer | No | 0 | - | Number of items to skip |
+
+## Basic Usage
+
+```bash
+# Default pagination
+GET /orders
+
+# Specific page size
+GET /orders?limit=20
+
+# Skip to page 3 (offset 20, limit 10)
+GET /orders?limit=10&offset=20
+```
+
+## Response Format
+
+```json
+{
+  "results": [
+    {
+      "id": "66294b2a4475a41f3e709bcc",
+      "name": "John",
+      "status": "Received"
+    }
+  ],
+  "total_results": 45
+}
+```
+
+## Combining with Filters
+
+```bash
+# Paginated filtered results
+GET /orders?filter=status.eq~Received&limit=10&offset=0
+```
+
+## Calculating Pages
+
+```javascript
+// Calculate total pages
+const totalPages = Math.ceil(response.total_results / limit);
+
+// Check for more pages
+const hasNextPage = (offset + limit) < response.total_results;
+const hasPreviousPage = offset > 0;
+```
+
+## Error Handling
+
+Maximum limit is 30. Exceeding this returns a `400 Bad Request` error.
+
+When offset exceeds available results, you get an empty `results` array.
